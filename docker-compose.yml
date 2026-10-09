@@ -1,0 +1,19 @@
+name: just-schedding-docker
+services:
+  db:
+    image: pgvector/pgvector:pg${DB_VERSION}
+    container_name: ${DB_CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes: 
+      - postgres_data:/var/lib/postgresql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    shm_size: 128mb
+
+volumes:
+  postgres_data:
