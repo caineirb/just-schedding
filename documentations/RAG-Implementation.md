@@ -7,10 +7,11 @@ config:
  htmlLabels: false
 ---
 flowchart TB
- subgraph User Space
+ subgraph UserSpace["User Space"]
   direction TB
   Query["`'I want to schedule a thesis meeting.'`"]
   Step7["(9) Confirmation"]
+  Query ~~~ Step7
  end
  
  subgraph Backend
@@ -30,9 +31,10 @@ flowchart TB
  end
  
  subgraph LLM
-  direction TB
+  direction LR
   Step1["(1) Intent Parsing"]
   Step6["(8) Slot Picking and Explanation"]
+  Step1 ~~~ Step6
  end
  
  Query -. "(1) Frontend sends the prompt" .-> Step1
@@ -40,6 +42,7 @@ flowchart TB
  Prompt -. "(8) Send" .-> Step6
  Step6 -. "(9) Ask the user for confirmation" .-> Step7
  Step7 -. "(10) Create and Log" .-> Database
+ UserSpace ~~~ Backend ~~~ LLM
 ```
 
 ## **Scenario/Prompt**: The user wants to schedule a thesis meeting with the group

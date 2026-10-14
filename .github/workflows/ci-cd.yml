@@ -1,1 +1,16 @@
-# To be filled
+name: CI/CD Pipeline
+
+# 1. Pipeline Trigger
+on:
+    push:
+        branches: [ main, stagging ]
+    pull_request:
+        branches: [ main, stagging ]
+
+# 2. Pipeline
+jobs:
+    lint-and-check:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Code Check Placeholder
+                run: echo "Pipeline triggered successfully! Ready for Docker build and tests later."
